@@ -7,25 +7,32 @@
 
 # Requires:
 # PyGame: http://pygame.org/download.shtml
+#     sudo pip install pygame
 # pyserial
 #     pip install pyserial
 # Python 3.
 
+# Usage:
+# Pass the serial port name as the first parameter:
+#  python3 rssi.py COM11
+#  python3 rssi.py /dev/ttyUSB0
+
+
 import os
+import sys
 import time
 
 import pygame.midi
 import serial
 
-# The serial port number where the incoming RSSI data will appear, starting at 1.
-COM_PORT_NUMBER = 3
 COM_PORT_BAUD_RATE = 115200
 
 # Flag for the value we're looking for
 RSSI_FLAG = 'RSSI='
 
 # Serial port setup
-thePort = serial.Serial('COM{}'.format(COM_PORT_NUMBER), COM_PORT_BAUD_RATE, timeout=60)
+serialPortPath = sys.argv[1]
+thePort = serial.Serial(serialPortPath, COM_PORT_BAUD_RATE, timeout=60)
 
 # MIDI setup
 pygame.midi.init()
