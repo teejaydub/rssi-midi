@@ -32,7 +32,7 @@ RSSI_FLAG = 'RSSI='
 
 # Serial port setup
 serialPortPath = sys.argv[1]
-thePort = serial.Serial(serialPortPath, COM_PORT_BAUD_RATE, timeout=60)
+thePort = serial.Serial(serialPortPath, COM_PORT_BAUD_RATE, timeout=15)
 
 # MIDI setup
 pygame.midi.init()
@@ -66,6 +66,8 @@ try:
             midiOut.note_off(currentNote)
             currentNote = newNote
             midiOut.note_on(currentNote, 127)
+except KeyboardInterrupt:
+    pass
 finally:
     # Clean up.
     midiOut.abort()
