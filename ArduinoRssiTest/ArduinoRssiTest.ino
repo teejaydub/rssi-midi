@@ -3,7 +3,11 @@
  *  If we get disconnected, try to reconnect constantly.
  */
 
+#if defined(ARDUINO_ESP8266_ESP01) || defined(ARDUINO_ESP8266_THING)
 #include <ESP8266WiFi.h>
+#else
+#include <WiFi.h>
+#endif
 
 const char* ssid     = "Set me";
 const char* password = "Set me";
