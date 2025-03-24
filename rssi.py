@@ -31,7 +31,11 @@ COM_PORT_BAUD_RATE = 115200
 RSSI_FLAG = 'RSSI='
 
 # Serial port setup
+if len(sys.argv) < 2:
+    print("Specify the path to the serial port on the command line, like 'COM1' or '/dev/ttyUSB0'.")
+    sys.exit()
 serialPortPath = sys.argv[1]
+print("Connecting to serial port '{}'.\nPress Ctrl+C to end.\n----".format(serialPortPath))
 thePort = serial.Serial(serialPortPath, COM_PORT_BAUD_RATE, timeout=15)
 
 # MIDI setup
